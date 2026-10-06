@@ -1,4 +1,4 @@
-# Cobblemon Shop
+# Cobblemon Server
 
 코블몬(Cobblemon) 모드팩 서버용 **상자 GUI 상점 · 뽑기 · 플레이어 거래** 모드입니다.
 
@@ -73,7 +73,7 @@
 2. IntelliJ에서 이 폴더를 엽니다. (`File → Open`) Gradle 프로젝트로 자동 인식됩니다.
 3. JDK 21이 없다고 나오면 IntelliJ 안내에 따라 **Temurin 21**을 다운로드합니다.
 4. 오른쪽 Gradle 탭에서 `Tasks → build → build`를 실행합니다.
-5. `build/libs/cobbleshop-1.0.0.jar`가 완성된 모드입니다. 서버의 `mods` 폴더에 넣으세요.
+5. `build/libs/cobblemon-server-1.0.0.jar`가 완성된 모드입니다. 서버의 `mods` 폴더에 넣으세요.
 
 GitHub에 올리면 **Actions 탭에서 자동으로 빌드**되고, 완성된 jar를 Artifacts에서 내려받을 수 있습니다.
 
