@@ -1,0 +1,27 @@
+{
+  "pokemart": {
+    "title": "포켓마트",
+    "items": [
+      { "item": "cobblemon:poke_ball",     "count": 1, "buy": 100,  "sell": 25 },
+      { "item": "cobblemon:great_ball",    "count": 1, "buy": 300,  "sell": 75 },
+      { "item": "cobblemon:ultra_ball",    "count": 1, "buy": 800,  "sell": 200 },
+      { "item": "cobblemon:potion",        "count": 1, "buy": 150 },
+      { "item": "cobblemon:super_potion",  "count": 1, "buy": 350 },
+      { "item": "cobblemon:revive",        "count": 1, "buy": 1000 },
+      { "item": "cobblemon:rare_candy",    "count": 1, "buy": 3000 },
+      { "item": "minecraft:bread",         "count": 4, "buy": 20,   "sell": 2 }
+    ]
+  },
+  "farm": {
+    "title": "농장 상점",
+    "items": [
+      { "item": "minecraft:wheat",       "count": 16, "buy": 40, "sell": 16 },
+      { "item": "minecraft:carrot",      "count": 16, "buy": 40, "sell": 16 },
+      { "item": "minecraft:potato",      "count": 16, "buy": 40, "sell": 16 },
+      { "item": "minecraft:beetroot",    "count": 16, "buy": 40, "sell": 16 },
+      { "item": "minecraft:pumpkin",     "count": 1,  "buy": 10, "sell": 4 },
+      { "item": "minecraft:melon_slice", "count": 16, "buy": 30, "sell": 12 },
+      { "item": "minecraft:apple",       "count": 1,  "buy": 5,  "sell": 2 }
+    ]
+  }
+}

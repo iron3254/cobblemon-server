@@ -1,0 +1,19 @@
+{
+  "basic": {
+    "title": "기본 뽑기",
+    "cost": 500,
+    "rewards": [
+      { "name": "몬스터볼 x5",   "item": "cobblemon:poke_ball",  "count": 5, "weight": 50 },
+      { "name": "슈퍼볼 x3",     "item": "cobblemon:great_ball", "count": 3, "weight": 25 },
+      { "name": "이상한사탕",    "item": "cobblemon:rare_candy", "count": 1, "weight": 15 },
+      { "name": "다이아몬드 x3", "item": "minecraft:diamond",    "count": 3, "weight": 8 },
+      {
+        "name": "★ 피카츄 ★",
+        "command": "pokegiveother {player} pikachu",
+        "icon": "cobblemon:master_ball",
+        "weight": 2,
+        "broadcast": true
+      }
+    ]
+  }
+}
