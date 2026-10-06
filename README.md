@@ -1,4 +1,4 @@
-# Cobble Shop
+# Cobblemon Shop
 
 코블몬(Cobblemon) 모드팩 서버용 **상자 GUI 상점 · 뽑기 · 플레이어 거래** 모드입니다.
 
