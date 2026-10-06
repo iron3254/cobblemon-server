@@ -2,6 +2,7 @@ package com.cobbleshop.util;
 
 import java.util.List;
 import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.ClickEvent;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
@@ -72,6 +73,13 @@ public final class PlayerUtil {
     /** 빨간색 실패 메시지. */
     public static void fail(ServerPlayer player, String message) {
         player.sendSystemMessage(Component.literal(message).withStyle(ChatFormatting.RED));
+    }
+
+    /** 채팅에서 클릭하면 명령어가 실행되는 굵은 글씨 버튼을 만든다. */
+    public static Component clickable(String text, ChatFormatting color, String command) {
+        return Component.literal(text).withStyle(style -> style
+                .withColor(color).withBold(true)
+                .withClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, command)));
     }
 
     /** 본인에게만 들리는 소리를 재생한다. */

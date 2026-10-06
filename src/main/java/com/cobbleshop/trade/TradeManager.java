@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 import net.minecraft.ChatFormatting;
-import net.minecraft.network.chat.ClickEvent;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 
@@ -43,14 +42,11 @@ public final class TradeManager {
         requests.put(to.getUUID(), new Request(from.getUUID(), System.currentTimeMillis()));
 
         String fromName = from.getGameProfile().getName();
-        Component accept = Component.literal("[수락]").withStyle(style -> style
-                .withColor(ChatFormatting.GREEN).withBold(true)
-                .withClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/trade accept " + fromName)));
-        Component deny = Component.literal("[거절]").withStyle(style -> style
-                .withColor(ChatFormatting.RED).withBold(true)
-                .withClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/trade deny")));
         to.sendSystemMessage(Component.literal(fromName + "님이 거래를 요청했습니다. (60초) ")
-                .withStyle(ChatFormatting.YELLOW).append(accept).append(" ").append(deny));
+                .withStyle(ChatFormatting.YELLOW)
+                .append(PlayerUtil.clickable("[수락]", ChatFormatting.GREEN, "/trade accept " + fromName))
+                .append(" ")
+                .append(PlayerUtil.clickable("[거절]", ChatFormatting.RED, "/trade deny")));
         PlayerUtil.success(from, to.getGameProfile().getName() + "님에게 거래를 요청했습니다.");
     }
 

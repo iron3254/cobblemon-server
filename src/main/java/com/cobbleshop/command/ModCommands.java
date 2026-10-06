@@ -6,6 +6,7 @@ import com.cobbleshop.config.ShopDefinition;
 import com.cobbleshop.economy.Money;
 import com.cobbleshop.gacha.GachaMenu;
 import com.cobbleshop.shop.ShopMenu;
+import com.cobbleshop.teleport.TpaManager;
 import com.cobbleshop.trade.TradeManager;
 import com.cobbleshop.util.PlayerUtil;
 import com.mojang.brigadier.CommandDispatcher;
@@ -30,6 +31,7 @@ import net.minecraft.server.level.ServerPlayer;
  *   <li>/money give|take|set &lt;플레이어&gt; &lt;금액&gt; (관리자)</li>
  *   <li>/shop &lt;상점ID&gt; [플레이어] · /gacha &lt;뽑기ID&gt; [플레이어]</li>
  *   <li>/trade &lt;플레이어&gt; · /trade accept &lt;플레이어&gt; · /trade deny</li>
+ *   <li>/tpa · /tpahere &lt;플레이어&gt; · /tpaccept · /tpdeny [플레이어] · /tpacancel</li>
  *   <li>/cobbleshop reload (관리자)</li>
  * </ul>
  */
@@ -89,6 +91,52 @@ public final class ModCommands {
                                     EntityArgument.getPlayer(context, "target"));
                             return 1;
                         })));
+
+        dispatcher.register(Commands.literal("tpa")
+                .then(Commands.argument("target", EntityArgument.player())
+                        .executes(context -> {
+                            TpaManager.request(context.getSource().getPlayerOrException(),
+                                    EntityArgument.getPlayer(context, "target"), false);
+                            return 1;
+                        })));
+
+        dispatcher.register(Commands.literal("tpahere")
+                .then(Commands.argument("target", EntityArgument.player())
+                        .executes(context -> {
+                            TpaManager.request(context.getSource().getPlayerOrException(),
+                                    EntityArgument.getPlayer(context, "target"), true);
+                            return 1;
+                        })));
+
+        dispatcher.register(Commands.literal("tpaccept")
+                .executes(context -> {
+                    TpaManager.accept(context.getSource().getPlayerOrException(), null);
+                    return 1;
+                })
+                .then(Commands.argument("from", EntityArgument.player())
+                        .executes(context -> {
+                            TpaManager.accept(context.getSource().getPlayerOrException(),
+                                    EntityArgument.getPlayer(context, "from"));
+                            return 1;
+                        })));
+
+        dispatcher.register(Commands.literal("tpdeny")
+                .executes(context -> {
+                    TpaManager.deny(context.getSource().getPlayerOrException(), null);
+                    return 1;
+                })
+                .then(Commands.argument("from", EntityArgument.player())
+                        .executes(context -> {
+                            TpaManager.deny(context.getSource().getPlayerOrException(),
+                                    EntityArgument.getPlayer(context, "from"));
+                            return 1;
+                        })));
+
+        dispatcher.register(Commands.literal("tpacancel")
+                .executes(context -> {
+                    TpaManager.cancelOwn(context.getSource().getPlayerOrException());
+                    return 1;
+                }));
 
         dispatcher.register(Commands.literal("cobbleshop").requires(ADMIN)
                 .then(Commands.literal("reload")

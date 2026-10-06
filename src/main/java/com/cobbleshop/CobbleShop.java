@@ -3,6 +3,7 @@ package com.cobbleshop;
 import com.cobbleshop.command.ModCommands;
 import com.cobbleshop.config.ConfigManager;
 import com.cobbleshop.economy.ModAttachments;
+import com.cobbleshop.teleport.TpaManager;
 import com.cobbleshop.trade.TradeManager;
 import com.mojang.logging.LogUtils;
 import net.minecraft.server.level.ServerPlayer;
@@ -13,6 +14,7 @@ import net.neoforged.neoforge.event.RegisterCommandsEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
+import net.neoforged.neoforge.event.tick.ServerTickEvent;
 import org.slf4j.Logger;
 
 /**
@@ -37,6 +39,11 @@ public class CobbleShop {
         NeoForge.EVENT_BUS.addListener(this::onRegisterCommands);
         NeoForge.EVENT_BUS.addListener(this::onPlayerLoggedOut);
         NeoForge.EVENT_BUS.addListener(this::onLivingDeath);
+        NeoForge.EVENT_BUS.addListener(this::onServerTick);
+    }
+
+    private void onServerTick(ServerTickEvent.Post event) {
+        TpaManager.tick(event.getServer());
     }
 
     private void onServerStarting(ServerStartingEvent event) {
@@ -51,6 +58,7 @@ public class CobbleShop {
     private void onPlayerLoggedOut(PlayerEvent.PlayerLoggedOutEvent event) {
         if (event.getEntity() instanceof ServerPlayer player) {
             TradeManager.cancelFor(player, "접속을 종료했습니다.");
+            TpaManager.clearFor(player);
         }
     }
 
